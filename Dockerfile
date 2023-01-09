@@ -1,5 +1,6 @@
 FROM maven:3.8.2-openjdk-8 as buildstage 
 WORKDIR /eben
+RUN chmod -R 777 eben
 COPY . .
 RUN mvn clean package
 
