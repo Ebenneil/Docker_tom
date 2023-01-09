@@ -1,24 +1,27 @@
 pipeline {
-    agent {label 'slave'}
+    agent {label 'b'}
     stages {
-        stage ('My Build') { 
+        stage('my Build') {
             steps {
-              sh 'mvn package'
-              sh 'pwd'
-              sh 'whoami'
-              sh 'scp -R /home/slave/workspace/job1/target/hello-world-war-1.0.0.war build@172.31.34.237:/opt/tomcat/webapps/'
+                sh 'docker build -t tomcat_build:${BUILD_NUMBER} .'
             }
-        }
-        stage ('My deploy') { 
-        agent {label 'slavebuild'}
+        }  
+        stage('publish stage') {
             steps {
-              sh 'pwd'
-              sh 'whoami'
-              sh 'sudo sh /opt/tomcat/bin/shutdown.sh'
-              sh 'sleep 3'
-              sh 'sudo sh /opt/tomcat/bin/startup.sh'
+                sh "echo ${BUILD_NUMBER}"
+                sh 'docker login -u ebenneelpinto -p Neil123451!'
+                sh 'docker tag tomcat_build:${BUILD_NUMBER} ebenneelpinto/tomcat:${BUILD_NUMBER}'
+                sh 'docker push ebenneelpinto/tomcat:${BUILD_NUMBER}'
             }
-        }
-    }
+        } 
+        stage( 'my deploy' ) {
+        agent {label 's'} 
+            steps {
+               sh 'docker pull ebenneelpinto/tomcat:${BUILD_NUMBER}'
+               sh 'docker rm -f mytomcat'
+               sh 'docker run -d -p 8080:8080 --name mytomcat ebenneelpinto/tomcat:${BUILD_NUMBER}'
+            }
+        }    
+    } 
 }
 
