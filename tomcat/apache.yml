@@ -1,0 +1,24 @@
+---
+- name: install playbook
+  hosts: all
+  tasks:
+    - name: apt update
+      apt:
+        name: "*"
+        state: latest
+
+    - name: install java
+      apt:
+        name: default-jdk
+        state: latest
+
+    - name: installing tomcat
+      get_url:
+          url: https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.tar.gz
+          dest: /opt/
+
+    - name: extracting tar file
+      unarchive:
+           src: "/opt/apache-tomcat-10.0.27.tar.gz"
+           dest: /opt/
+           remote_src: yes
