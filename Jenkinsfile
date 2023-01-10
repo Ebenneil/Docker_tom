@@ -9,6 +9,7 @@ pipeline {
         stage('publish stage') {
             steps {
                 sh "echo ${BUILD_NUMBER}"
+                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')])
                 sh 'docker login -u ebenneelpinto -p Neil123451!'
                 sh 'docker tag tomcat_build:${BUILD_NUMBER} ebenneelpinto/mytom:${BUILD_NUMBER}'
                 sh 'docker push ebenneelpinto/mytom:${BUILD_NUMBER}'
