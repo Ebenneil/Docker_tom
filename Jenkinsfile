@@ -9,9 +9,7 @@ pipeline {
         }  
         stage('publish stage') {
             steps {
-                sh "echo ${BUILD_NUMBER}"
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]){
-                                 
+                                    
                 sh 'curl -uebenneelpinto@gmail.com:Neil12345! -T tomcat-${BUILD_NUMBER}.tgz \"https://ebenneilpinto.jfrog.io/artifactory/helm/tomcat-${BUILD_NUMBER}.tgz\"'
                 }
             }
