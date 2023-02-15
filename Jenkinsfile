@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'b'}
+    agent {label 'build'}
     stages {
         stage('my Build') {
             steps {
@@ -20,7 +20,7 @@ pipeline {
             }
         } 
         stage( 'my deploy' ) {
-        agent {label 's'} 
+        agent {label 'deploy'} 
             steps {
                sh 'helm repo add helm https://ebenneilpinto.jfrog.io/artifactory/api/helm/helm --username ebenneelpinto@gmail.com --password Neil12345!'
                sh 'helm repo update'
