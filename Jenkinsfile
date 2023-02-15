@@ -11,7 +11,7 @@ pipeline {
             steps {
                                     
                 sh 'curl -uebenneelpinto@gmail.com:Neil12345! -T tomcat-${BUILD_NUMBER}.tgz \"https://ebenneilpinto.jfrog.io/artifactory/helm/tomcat-${BUILD_NUMBER}.tgz\"'
-                }
+              
             }
         } 
         stage( 'my deploy' ) {
