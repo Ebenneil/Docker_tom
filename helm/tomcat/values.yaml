@@ -1,0 +1,12 @@
+selector_matchlabels: 
+deployment_name: 
+replicas: 
+registry_name: 
+docker_repo_name: 
+image_tag: 
+port_name: 
+target_port:
+port: 
+favorite:
+  drink: 
+  food: 
