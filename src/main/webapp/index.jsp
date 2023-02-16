@@ -9,7 +9,7 @@
 	<p>
 		Experience : 3 years
         <p>
-		Company : Parle Elizabeth 
+		Company : Parle Elizabeth tools pvd ltd
 	<P>    
 		Hobbies : watching movies, cooking and playing cricket
 </body>
